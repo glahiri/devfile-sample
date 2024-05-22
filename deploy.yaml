@@ -12,9 +12,16 @@ spec:
       labels:
         app: nodejs-app
     spec:
+      volumes:
+        - name: pega-listeners
+          persistentVolumeClaim:
+            claimName: pega-listeners
       containers:
         - name: my-nodejs
           image: nodejs-image:latest
+          volumeMounts:
+            - name: pega-listeners
+              mountPath: /opt/pega/listeners
           ports:
             - name: http
               containerPort: 3001
